@@ -6,7 +6,7 @@
 
 # These config entries will be overridden by runbrick.py (common.py actually) :
 CATALOG_NAME     test.cat       # name of the output catalog
-PARAMETERS_NAME  DECaLS-v2.param  # name of the file containing catalog contents
+PARAMETERS_NAME  DECaLS.param  # name of the file containing catalog contents
 DETECT_THRESH    1.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
 ANALYSIS_THRESH  1.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
 FILTER_NAME      gauss_5.0_9x9.conv   # name of the file containing the filter
