@@ -3,25 +3,34 @@
 #
  
 #-------------------------------- Catalog ------------------------------------
- 
+
+# These config entries will be overridden by runbrick.py (common.py actually) :
 CATALOG_NAME     test.cat       # name of the output catalog
+PARAMETERS_NAME  DECaLS-v2.param  # name of the file containing catalog contents
+DETECT_THRESH    1.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
+ANALYSIS_THRESH  1.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
+FILTER_NAME      gauss_5.0_9x9.conv   # name of the file containing the filter
+MAG_ZEROPOINT    30.0           # magnitude zero-point
+PIXEL_SCALE      0              # size of pixel in arcsec (0=use FITS WCS info)
+SEEING_FWHM      1.2            # stellar FWHM in arcsec
+STARNNW_NAME     default.nnw    # Neural-Network_Weight table filename
+
+
+
+#-------------------------------- Catalog ------------------------------------
+
 CATALOG_TYPE     FITS_LDAC     # NONE,ASCII,ASCII_HEAD, ASCII_SKYCAT,
                                 # ASCII_VOTABLE, FITS_1.0 or FITS_LDAC
-PARAMETERS_NAME  /project/projectdirs/desi/imaging/code/cats/DECaLS-v2.param  # name of the file containing catalog contents
  
 #------------------------------- Extraction ----------------------------------
  
 DETECT_TYPE      CCD            # CCD (linear) or PHOTO (with gamma correction)
-#DETECT_MINAREA   11              # minimum number of pixels above threshold
 DETECT_MINAREA   5              # minimum number of pixels above threshold
 DETECT_MAXAREA   0              # max. # of pixels above threshold (0=unlimited)
-DETECT_THRESH    7.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
-ANALYSIS_THRESH  7.0            # <sigmas> or <threshold>,<ZP> in mag.arcsec-2
 THRESH_TYPE      RELATIVE       # threshold type: RELATIVE (in sigmas)
                                 # or ABSOLUTE (in ADUs)
  
 FILTER           Y              # apply filter for detection (Y or N)?
-FILTER_NAME      /project/projectdirs/desi/imaging/code/cats/gauss_5.0_9x9.conv   # name of the file containing the filter
  
 DEBLEND_NTHRESH  64             # Number of deblending sub-thresholds
 DEBLEND_MINCONT  0.000015          # Minimum contrast parameter for deblending
@@ -36,25 +45,21 @@ FITS_UNSIGNED   Y               # Force 16-bit FITS input data to be
                                 # interpreted as unsigned integers
 
 #------------------------------ Photometry -----------------------------------
- 
-PHOT_APERTURES   5.376, 8.065, 10.753, 13.441, 16.129, 18.817, 21.505, 26.882, 32.258, 37.634, 43.011, 48.387, 53.763, 59.140, 64.516 # MAG_APER aperture diameter(s) in pixels
+
+# corresponding to diameters of [1.5,3,5,7,9,11,13,15] arcsec.
+# From Arjun in [decam-data 335]
+PHOT_APERTURES  5.555,11.1111,18.5185,25.9259,33.3333,40.7407,48.1481,55.5556   
+
 PHOT_AUTOPARAMS  2.5, 3.5       # MAG_AUTO parameters: <Kron_fact>,<min_radius>
-#PHOT_APERTURES   11.45,19.08,26.72,34.35,41.98,49.86,57.25  # MAG_APER aperture diameter(s) in pixels
-#PHOT_AUTOPARAMS  2.5, 3.5       # MAG_AUTO parameters: <Kron_fact>,<min_radius>
 PHOT_PETROPARAMS 2.0, 3.5       # MAG_PETRO parameters: <Petrosian_fact>,
                                 # <min_radius>
  
 SATUR_LEVEL      40000.0        # level (in ADUs) at which arises saturation
  
-MAG_ZEROPOINT    30.0           # magnitude zero-point
-#MAG_GAMMA        4.0            # gamma of emulsion (for photographic scans)
 GAIN             4.0            # detector gain in e-/ADU
-PIXEL_SCALE      0.262          # size of pixel in arcsec (0=use FITS WCS info)
  
 #------------------------- Star/Galaxy Separation ----------------------------
  
-SEEING_FWHM      1.2            # stellar FWHM in arcsec
-STARNNW_NAME     /project/projectdirs/desi/imaging/code/cats/default.nnw    # Neural-Network_Weight table filename
  
 #------------------------------ Background -----------------------------------
  
@@ -68,17 +73,8 @@ BACKPHOTO_THICK  24            # thickness (pix) of background rectangular apert
  
 CHECKIMAGE_TYPE NONE
 
-#CHECKIMAGE_TYPE  BACKGROUND,OBJECTS,SEGMENTATION           # can be NONE, BACKGROUND, BACKGROUND_RMS,
-                                # MINIBACKGROUND, MINIBACK_RMS, -BACKGROUND,
-                                # FILTERED, OBJECTS, -OBJECTS, SEGMENTATION,
-                                # or APERTURES
-#CHECKIMAGE_NAME  check.fits     # Filename for the check-image
- 
 #--------------------- Memory (change with caution!) -------------------------
  
-#MEMORY_OBJSTACK  10000          # number of objects in stack
-#MEMORY_PIXSTACK  10000000        # number of pixels in stack
-
 MEMORY_OBJSTACK  30000          # number of objects in stack
 MEMORY_PIXSTACK  10000000        # number of pixels in stack 
 MEMORY_BUFSIZE   1024          # number of lines in buffer (set to 16k)
