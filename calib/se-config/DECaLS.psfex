@@ -83,7 +83,8 @@ CHECKIMAGE_TYPE NONE
  
 PSF_DIR                         # Where to write PSFs (empty=same as input)
 PSF_SUFFIX      .fits            # Filename extension for output PSF filename
-VERBOSE_TYPE    FULL            # can be QUIET,NORMAL,LOG or FULL
+#VERBOSE_TYPE    FULL            # can be QUIET,NORMAL,LOG or FULL
+VERBOSE_TYPE QUIET
 WRITE_XML       N               # Write XML file (Y/N)?
 XML_NAME        psfex.xml       # Filename for XML output
 XSL_URL         file:///share/apps/usr/share/psfex/psfex.xsl
